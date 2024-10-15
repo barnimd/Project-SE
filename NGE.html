@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naive Gaussian Elimination Calculator</title>
+    <link rel="stylesheet" href="NGE.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gaussian Elimination Calculator</h1>
+        
+        <div class="input-section">
+            <label>Matrix dimension: 
+                <input type="number" id="rows" placeholder="Row" value="" min="2" max="10">
+                X
+                <input type="number" id="columns" placeholder="Collumn - 1" value="" min="2" max="10">
+            </label>
+            <button onclick="generateMatrix()">Set matrix</button>
+        </div>
+
+        <div id="matrix-container"></div>
+
+        <div id="result"></div>
+        <div>
+            <a href="index.html" class="button">Back to Main Page</a>
+        </div>
+        
+
+    </div>
+
+    <script src="NGE.js"></script>
+
+    <script>
+        function generateMatrix() {
+            const rows = document.getElementById('rows').value;
+            const columns = document.getElementById('columns').value;
+
+            const matrixContainer = document.getElementById('matrix-container');
+            matrixContainer.innerHTML = '';  // Clear any existing matrix
+
+            for (let i = 0; i < rows; i++) {
+                let rowDiv = document.createElement('div');
+                rowDiv.classList.add('matrix-row');
+
+                for (let j = 0; j < columns - 1; j++) {
+                    let input = document.createElement('input');
+                    input.type = 'number';
+                    input.placeholder = `X${j + 1}`;
+                    rowDiv.appendChild(input);
+                }
+
+                let bInput = document.createElement('input');
+                bInput.type = 'number';
+                bInput.placeholder = 'b';
+                rowDiv.appendChild(bInput);
+
+                matrixContainer.appendChild(rowDiv);
+            }
+
+            let solveButton = document.createElement('button');
+            solveButton.innerHTML = 'Solve Matrix';
+            solveButton.onclick = solveMatrix;
+            matrixContainer.appendChild(solveButton);
+        }
+    </script>
+</body>
+</html>
